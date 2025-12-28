@@ -5,4 +5,12 @@ class gerenciador_conexao:
         self.usuarios_activos = []
 
     async def conectar(self,ws:WebSocket):
-        ws.accept()    
+        await ws.accept()
+        self.usuarios_activos.append(ws)
+
+    def desconectar(self,ws:WebSocket):
+        self.usuarios_activos.remove(ws)
+
+    async def broadcast(self,mensagem:str):
+        for conectado in self.usuarios_activos:
+            await conectado.send_text(mensagem)
