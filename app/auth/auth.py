@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException
-from fastapi.security import  OAuth2PasswordRequestForm
 from jose import jwt,JWTError
-from main import SECRETY_KEY,ALGORITHM,ACESS_TOKEN_MINUTO_EXPIRACAO,bcrypt_context,oauth2_schema
+from app.core.config import SECRETY_KEY, ALGORITHM, ACESS_TOKEN_MINUTO_EXPIRACAO
+from app.core.security import bcrypt_context, oauth2_schema
 from sqlalchemy.orm import Session
 from app.models.modelos import Usuario
 from app.core.database import pegar_db

@@ -12,10 +12,6 @@ import os
 from fastapi.security import OAuth2PasswordBearer
 
 
-load_dotenv()
-SECRETY_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = os.getenv("ALGORITHM")
-ACESS_TOKEN_MINUTO_EXPIRACAO = int(os.getenv("ACESS_TOKEN_MINUTO_EXPIRACAO"))
 
 app = FastAPI()
 
@@ -28,7 +24,7 @@ oauth2_schema = OAuth2PasswordBearer(tokenUrl="login")
 async def ws_rota(ws):
     await endpoint_websocket(ws)
 
-@app.on_event("iniciar")
+@app.on_event("startup")
 async def iniciar_loop():
     asyncio.create_task(risco_loop)
 
