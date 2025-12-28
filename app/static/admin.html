@@ -1,0 +1,11 @@
+<h2>Alerta de Preços</h2>
+<div id="alertas"></div>
+
+<script>
+const ws = new WebSocket("ws://localhost:8000/ws");
+ws.onmessage = e => {
+  const el = document.createElement("p");
+  el.textContent = e.data;
+  document.getElementById("alertas").appendChild(el);
+};
+</script>

@@ -21,7 +21,7 @@ app = FastAPI()
 
 
 bcrypt_context = CryptContext(schemes=["bcrypt"],deprecated= "auto")
-oauth2_schema = OAuth2PasswordBearer(tokenUrl="auth/login-form")
+oauth2_schema = OAuth2PasswordBearer(tokenUrl="login")
 
 
 @app.websocket("/ws")
@@ -32,9 +32,11 @@ async def ws_rota(ws):
 async def iniciar_loop():
     asyncio.create_task(risco_loop)
 
-@app.post("/token")
-async def token(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = authenticate(form.username, form.password, db)
-    if not user:
-        return {"error": "invalid"}
-    return {"access_token": create_token(user), "token_type": "bearer"}    
+@app.post("/login")
+async def login(form: OAuth2PasswordRequestForm = Depends(), session: session = Depends(pegar_db)):
+    usuario = autenticar_usuario(form.username, form.password, session)
+    if not usuario:
+        return False
+    return {"access_token": criar_token(usuario.id),
+             "token_type": "bearer"
+    }    
