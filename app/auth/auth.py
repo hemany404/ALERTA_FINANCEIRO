@@ -1,6 +1,6 @@
 from fastapi import Depends, HTTPException
 from fastapi.security import  OAuth2PasswordRequestForm
-from jose import jwt
+from jose import jwt,JWTError
 from app.main import oauth2_schema,SECRETY_KEY,ALGORITHM,ACESS_TOKEN_MINUTO_EXPIRACAO,bcrypt_context
 from sqlalchemy.orm import Session
 from app.models.modelos import Usuario
@@ -21,4 +21,13 @@ def autenticar_usuario(email,senha,session):
         return False
     return usuario
 
-async def pegar_usuario(token: str =Depends(oauth2_schema)) 
+async def pegar_usuario(token: str =Depends(oauth2_schema),session: Session =Depends(pegar_db)) :
+    try:
+        dic_info = jwt.decode(token,SECRETY_KEY,ALGORITHM)
+        id_usuario = int(dic_info.get("sub"))
+    except JWTError:
+        raise HTTPException(status_code=401,detail="token invalido")
+    usuario = session.query(Usuario).filter(Usuario.id == id_usuario).first()
+    if not usuario:
+        raise HTTPException(status_code=404,detail="usuario ñão encontrado")
+    return usuario    
