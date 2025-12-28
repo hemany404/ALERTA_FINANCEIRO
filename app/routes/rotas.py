@@ -11,5 +11,6 @@ async def endpoint_websocket(ws:WebSocket):
         while True:
             data = await ws.receive_text()
             await gerenciador.broadcast(data)
+            
     except WebSocketDisconnect:
         gerenciador.desconectar(ws)        
