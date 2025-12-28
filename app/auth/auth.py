@@ -9,12 +9,12 @@ from datetime import timedelta, timezone, datetime
 
 def criar_token(id_usuario: int, duracao_token = timedelta(minutes=ACESS_TOKEN_MINUTO_EXPIRACAO)):
     data_expircao = datetime.now(timezone.utc) + duracao_token
-    dic_info = {"sub":str(id_instituicao), "expiracao": str(data_expircao)}
+    dic_info = {"sub":str(id_usuario), "expiracao": str(data_expircao)}
     jwt_codificado = jwt.encode(dic_info,SECRETY_KEY,ALGORITHM)
     return jwt_codificado
 
 def autenticar_usuario(email,senha,session):
-    instituicao = session.query(Instituicao).filter(Instituicao.email == email).first()
+    instituicao = session.query(Usuario).filter(Instituicao.email == email).first()
     if not instituicao:
         return False
     elif not bcrypt_context.verify(senha,instituicao.senha):
