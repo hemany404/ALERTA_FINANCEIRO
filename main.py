@@ -1,9 +1,11 @@
-from fastapi import FastAPI,Depends
+from fastapi import FastAPI,Depends,HTTPException
 import asyncio
 from app.services.alerta_risco import risco_loop
 from  fastapi import WebSocket,WebSocketDisconnect
 from app.websocket.gerenciador_websocket import gerenciador
 from sqlalchemy.orm import session
+from app.model.modelo import Simbolos
+from app.schema.schema import SimbolosSchema
 from app.core.database import pegar_bd 
 
 
@@ -28,7 +30,23 @@ async def enviar_msg(msg:str):
      return {"mensagem enviada"}
 
 app.post("/adicionar_simbolo")
-async def adicioanar_simbolo(session: session = Depends(pegar_bd),)
+async def adicioanar_simbolo(
+            simbolo_schema:SimbolosSchema,
+            session: session = Depends(pegar_bd)):
+     simbolo =session.query(Simbolos).filter(Simbolos.simbolo ==  simbolo_schema.simbolo).first()
+     
+     if  simbolo:
+          raise HTTPException(status_code=401,detail=" Este simbolo já foi adicionado")
+     
+     novo_simbolo = Simbolos(simbolo_schema.simbolo,simbolo_schema.valor_limite)
+     session.add(novo_simbolo)
+     session.commit()
+
+     return {
+          "mensagem":"simbolo adicionado com sucesso"
+     }
+          
+     
 
 @app.on_event("startup")
 async def iniciar_loop():

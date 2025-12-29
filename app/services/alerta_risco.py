@@ -1,14 +1,13 @@
 from app.api_financeira import buscar_preco
 from app.websocket.gerenciador_websocket import gerenciador
 import asyncio
+from sqlalchemy.orm import 
+from app.core.database import pegar_bd
 
 
 
 
-RISCO ={
-    "ETHBTC":0.14356000,
-    "NEOBTC":0.00044240
-}
+
 
 async def risco_loop():
     while True:
