@@ -8,6 +8,7 @@ async def buscar_preco(simbolo: str) -> float:
         )
 
         dados = resposta.json()
+        
 
         if "price" not in dados:
             raise ValueError(f"Erro da API: {dados}")

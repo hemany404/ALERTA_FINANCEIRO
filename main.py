@@ -2,14 +2,10 @@ from fastapi import FastAPI,Depends
 import asyncio
 from app.services.alerta_risco import risco_loop
 from  fastapi import WebSocket,WebSocketDisconnect
-from app.websocket.gerenciador_websocket import gerenciador_conexao
+from app.websocket.gerenciador_websocket import gerenciador
 
-gerenciador = gerenciador_conexao()
 
 app = FastAPI()
-
-
-
 
 
 @app.websocket("/ws")

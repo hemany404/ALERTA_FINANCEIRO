@@ -16,3 +16,5 @@ class gerenciador_conexao:
         for conectado in self.usuarios_activos:
             await conectado.send_text(mensagem)
             print(len(self.usuarios_activos))
+            
+gerenciador = gerenciador_conexao()           
