@@ -1,13 +1,16 @@
 from app.api_financeira import buscar_preco
 from app.websocket.gerenciador_websocket import gerenciador
 import asyncio
-from sqlalchemy.orm import 
+from typing import Annotated
+from fastapi import Depends
+from sqlalchemy.orm import session
+from app.model.modelo import Simbolos
 from app.core.database import pegar_bd
 
+Session = Annotated[session, Depends(pegar_bd)]
 
 
-
-
+simbolo = Session.query(si)
 
 async def risco_loop():
     while True:
