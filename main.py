@@ -20,10 +20,12 @@ async def endpoint_websocket(ws:WebSocket):
         except WebSocketDisconnect:
             gerenciador.desconectar(ws)        
 
-@app.post("/teste")
+@app.post("/teste_do_broadcast")
 async def enviar_msg(msg:str):
      await gerenciador.broadcast(msg)
      return {"mensagem enviada"}
+
+app.post("/adicionar_simbolo")
 
 @app.on_event("startup")
 async def iniciar_loop():
