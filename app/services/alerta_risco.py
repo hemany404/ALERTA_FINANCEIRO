@@ -17,4 +17,4 @@ async def risco_loop():
             except Exception as e:
                 print("Erro no monitoramento:", e)        
 
-            await asyncio.sleep(10  )
+            await asyncio.sleep(10)

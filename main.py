@@ -1,35 +1,16 @@
 from fastapi import FastAPI,Depends
-from passlib.context import CryptContext
-from dotenv import load_dotenv
 import asyncio
-
 from app.services.alerta_risco import risco_loop
-from app.auth.auth import autenticar_usuario,criar_token
-from app.core.database import pegar_db
-from fastapi.security import OAuth2PasswordRequestForm
-from sqlalchemy.orm import session
-import os
-from  fastapi import WebSocket,WebSocketDisconnect,APIRouter
+from  fastapi import WebSocket,WebSocketDisconnect
 from app.websocket.gerenciador_websocket import gerenciador_conexao
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.security import OAuth2PasswordBearer
 
-
+gerenciador = gerenciador_conexao()
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
-bcrypt_context = CryptContext(schemes=["bcrypt"],deprecated= "auto")
-oauth2_schema = OAuth2PasswordBearer(tokenUrl="login")
 
-gerenciador = gerenciador_conexao()
+
 
 @app.websocket("/ws")
 async def endpoint_websocket(ws:WebSocket):
@@ -42,6 +23,11 @@ async def endpoint_websocket(ws:WebSocket):
 
         except WebSocketDisconnect:
             gerenciador.desconectar(ws)        
+
+@app.post("/teste")
+async def enviar_msg(msg:str):
+     await gerenciador.broadcast(msg)
+     return {"mensagem enviada"}
 
 @app.on_event("startup")
 async def iniciar_loop():
