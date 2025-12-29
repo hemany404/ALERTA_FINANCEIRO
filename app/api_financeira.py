@@ -14,3 +14,4 @@ async def buscar_preco(simbolo: str) -> float:
             raise ValueError(f"Erro da API: {dados}")
 
         return float(dados["price"])
+    
