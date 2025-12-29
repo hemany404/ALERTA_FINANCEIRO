@@ -29,7 +29,7 @@ async def enviar_msg(msg:str):
      await gerenciador.broadcast(msg)
      return {"mensagem enviada"}
 
-app.post("/adicionar_simbolo")
+@app.post("/adicionar_simbolo")
 async def adicioanar_simbolo(
             simbolo_schema:SimbolosSchema,
             session: session = Depends(pegar_bd)):
@@ -38,7 +38,7 @@ async def adicioanar_simbolo(
      if  simbolo:
           raise HTTPException(status_code=401,detail=" Este simbolo já foi adicionado")
      
-     novo_simbolo = Simbolos(simbolo_schema.simbolo,simbolo_schema.valor_limite)
+     novo_simbolo = Simbolos(simbolo_schema.simbolo,simbolo_schema.valor_limite )
      session.add(novo_simbolo)
      session.commit()
 
@@ -50,5 +50,8 @@ async def adicioanar_simbolo(
 
 @app.on_event("startup")
 async def iniciar_loop():
+    
     asyncio.create_task(risco_loop())
+      
+
   
