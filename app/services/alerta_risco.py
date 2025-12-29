@@ -19,7 +19,7 @@ async def risco_loop():
             try:
                 preco = await buscar_preco(simbolo)
                 if preco and valor > preco:
-                    await gerenciador.broadcast(f"☢️❌ {simbolo} abaixo de {valor}! ({preco})")
+                    await gerenciador.broadcast(f"☢️❌ {simbolo} abaixo de {valor}! preçco actual({preco})")
                     print("mensagem enviada")
             except Exception as e:
                 print("Erro no monitoramento:", e)        
