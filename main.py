@@ -3,6 +3,8 @@ import asyncio
 from app.services.alerta_risco import risco_loop
 from  fastapi import WebSocket,WebSocketDisconnect
 from app.websocket.gerenciador_websocket import gerenciador
+from sqlalchemy.orm import session
+from app.core.database import pegar_bd 
 
 
 app = FastAPI()
@@ -26,6 +28,7 @@ async def enviar_msg(msg:str):
      return {"mensagem enviada"}
 
 app.post("/adicionar_simbolo")
+async def adicioanar_simbolo(session: session = Depends(pegar_bd),)
 
 @app.on_event("startup")
 async def iniciar_loop():
