@@ -13,7 +13,7 @@ from app.core.database import pegar_bd
 async def risco_loop():
     Session:session= next(pegar_bd())
     simbolos = Session.query(Simbolos).all()
-    simbolo_dict = {s.simbolo: s.valor for s in simbolos}
+    simbolo_dict = {s.simbolo: s.valor_limite for s in simbolos}
     while True:
         for simbolo,valor in simbolo_dict.items():
             try:
@@ -24,4 +24,4 @@ async def risco_loop():
             except Exception as e:
                 print("Erro no monitoramento:", e)        
 
-            await asyncio.sleep(1)
+            await asyncio.sleep(20)
