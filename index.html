@@ -3,9 +3,12 @@
 
 <script>
 const ws = new WebSocket("ws://localhost:8000/ws");
+ws.onopen = () => console.log("Conectado!");
 ws.onmessage = e => {
   const el = document.createElement("p");
   el.textContent = e.data;
   document.getElementById("alertas").appendChild(el);
+  
+ws.onerror = (e) => console.error("Erro:", e);
 };
 </script>
