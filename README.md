@@ -98,7 +98,7 @@ http://localhost:8000/docs
 Execute o arquivo index.html
 
 ```
-ATT: o frontend não é dos melhores😂😂😂(feito por ia)
+ATT: o frontend não é dos melhores😂😂😂
 ```
 ---
 
