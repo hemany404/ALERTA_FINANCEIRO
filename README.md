@@ -95,9 +95,11 @@ Abra no navegador:
 ```
 http://localhost:8000/docs
 ```
-e execute o arquivo index.html
+Execute o arquivo index.html
 
+```
 ATT: o frontend não é dos melhores😂😂😂(feito por ia)
+```
 ---
 
 
