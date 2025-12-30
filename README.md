@@ -37,16 +37,7 @@ O sistema permite que o usuário:
 * **HTTPX**
 * **HTML + CSS + JavaScript**
 * **API pública da Binance**
-| Tecnologia | 
-| ---------- | 
-| FastAPI    | 
-| SQLAlchemy | 
-| Websocket  | 
-| Sqlite     | 
-| Alembic    | 
-| HTTPX      | 
-| HTML + CSS + JavaScript  |  
-| API pública da Binance    |  
+
 
 
 ## 🔁 Funcionamento do Sistema
