@@ -7,6 +7,7 @@ from sqlalchemy.orm import session
 from app.model.modelo import Simbolos
 from app.schema.schema import SimbolosSchema
 from app.core.database import pegar_bd 
+from fastapi import Path
 
 
 app = FastAPI()
