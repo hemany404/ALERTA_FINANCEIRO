@@ -1,5 +1,6 @@
 from fastapi import FastAPI,Depends,HTTPException
-from sqlalchemy.orm import session
+from sqlalchemy.orm import Session
+from contextlib import AsyncContextDecorator
 from  fastapi import WebSocket,WebSocketDisconnect
 
 
@@ -36,7 +37,7 @@ async def enviar_msg(msg:str):
 @app.post("/adicionar_simbolo")
 async def adicioanar_simbolo(
             simbolo_schema:SimbolosSchema,
-            session: session = Depends(pegar_bd)):
+            session: Session = Depends(pegar_bd)):
      simbolo =session.query(Simbolos).filter(Simbolos.simbolo ==  simbolo_schema.simbolo).first()
      
      if  simbolo:
