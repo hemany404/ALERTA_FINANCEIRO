@@ -12,16 +12,16 @@ from app.model.modelo import Simbolos
 from app.schema.schema import SimbolosSchema
 from app.core.database import pegar_bd 
 
-@asynccontextmanager
+"""@asynccontextmanager
 async def lifespan(app: FastAPI):
     
     await risco_loop()
 
-    yield
+    yield"""
       
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI()
 
 
 @app.websocket("/ws")
@@ -59,7 +59,11 @@ async def adicioanar_simbolo(
      }
           
      
-
+@app.on_event("startup")
+async def iniciar_loop():
+    
+    asyncio.create_task(risco_loop())
+      
 
 
   
