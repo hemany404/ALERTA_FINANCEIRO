@@ -1,13 +1,16 @@
 from fastapi import FastAPI,Depends,HTTPException
-import asyncio
-from app.services.alerta_risco import risco_loop
-from  fastapi import WebSocket,WebSocketDisconnect
-from app.websocket.gerenciador_websocket import gerenciador
 from sqlalchemy.orm import session
+from  fastapi import WebSocket,WebSocketDisconnect
+
+
+import asyncio
+
+from app.services.alerta_risco import risco_loop
+from app.websocket.gerenciador_websocket import gerenciador
 from app.model.modelo import Simbolos
 from app.schema.schema import SimbolosSchema
 from app.core.database import pegar_bd 
-from fastapi import Path
+
 
 
 app = FastAPI()
