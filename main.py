@@ -1,6 +1,6 @@
 from fastapi import FastAPI,Depends,HTTPException
 from sqlalchemy.orm import Session
-from contextlib import AsyncContextDecorator
+from contextlib import asynccontextmanager
 from  fastapi import WebSocket,WebSocketDisconnect
 
 
@@ -12,9 +12,16 @@ from app.model.modelo import Simbolos
 from app.schema.schema import SimbolosSchema
 from app.core.database import pegar_bd 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    
+    await risco_loop()
+
+    yield
+      
 
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 
 @app.websocket("/ws")
@@ -36,8 +43,8 @@ async def enviar_msg(msg:str):
 
 @app.post("/adicionar_simbolo")
 async def adicioanar_simbolo(
-            simbolo_schema:SimbolosSchema,
-            session: Session = Depends(pegar_bd)):
+                              simbolo_schema:SimbolosSchema,
+                               session: Session = Depends(pegar_bd)):
      simbolo =session.query(Simbolos).filter(Simbolos.simbolo ==  simbolo_schema.simbolo).first()
      
      if  simbolo:
@@ -53,10 +60,6 @@ async def adicioanar_simbolo(
           
      
 
-@app.on_event("startup")
-async def iniciar_loop():
-    
-    asyncio.create_task(risco_loop())
-      
+
 
   
