@@ -3,7 +3,7 @@ from app.api_financeira import buscar_preco
 from app.websocket.gerenciador_websocket import gerenciador
 import asyncio
 from typing import Annotated
-from sqlalchemy.orm import session
+from sqlalchemy.orm import Session
 from app.model.modelo import Simbolos
 from app.core.database import pegar_bd
 
@@ -11,7 +11,7 @@ from app.core.database import pegar_bd
 
 
 async def risco_loop():
-    Session:session= next(pegar_bd())
+    session:Session= next(pegar_bd())
     simbolos = Session.query(Simbolos).all()
     simbolo_dict = {s.simbolo: s.valor_limite for s in simbolos}
     while True:
