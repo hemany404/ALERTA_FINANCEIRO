@@ -12,7 +12,7 @@ from app.core.database import pegar_bd
 
 async def risco_loop():
     session:Session= next(pegar_bd())
-    simbolos = Session.query(Simbolos).all()
+    simbolos = session.query(Simbolos).all()
     simbolo_dict = {s.simbolo: s.valor_limite for s in simbolos}
     while True:
         for simbolo,valor in simbolo_dict.items():
