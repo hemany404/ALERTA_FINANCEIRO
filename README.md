@@ -6,7 +6,7 @@
 
 ---
 
-## 🧠 Descrição do Projeto
+## Descrição do Projeto
 
 Este projeto é um **sistema de alertas financeiros em tempo real**, desenvolvido como projeto de estudo para aprofundar conhecimentos em:
 
@@ -27,7 +27,7 @@ O sistema permite que o usuário:
 
 ---
 
-## 🧩 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 * **Python 3.12**
 * **FastAPI**
@@ -40,7 +40,7 @@ O sistema permite que o usuário:
 
 
 
-## 🔁 Funcionamento do Sistema
+##  Funcionamento do Sistema
 
 1. O servidor inicia um **loop de monitoramento assíncrono**.
 2. O loop consulta a API da Binance a cada intervalo configurado.
@@ -52,17 +52,17 @@ O sistema permite que o usuário:
 
 ---
 
-## 🧪 Exemplo de Alerta
+##  Exemplo de Alerta
 
 ```
-⚠️ ALERTA: BTCUSDT caiu para 61780.20 (abaixo do limite de 62000.00)
+ ALERTA: BTCUSDT caiu para 61780.20 (abaixo do limite de 62000.00)
 ```
 
 ---
 
-## 🚀 Como Executar o Projeto
+##  Como Executar o Projeto
 
-### 1️⃣ Criar ambiente virtual
+### 1️ Criar ambiente virtual
 
 ```bash
 python -m venv venv
@@ -70,25 +70,25 @@ source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 ```
 
-### 2️⃣ Instalar dependências
+### 2️ Instalar dependências
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Aplicar migrações
+### 3️ Aplicar migrações
 
 ```bash
 alembic upgrade head
 ```
 
-### 4️⃣ Iniciar o servidor
+### 4️ Iniciar o servidor
 
 ```bash
 uvicorn main:app --reload
 ```
 
-### 5️⃣ Abrir o painel Web
+### 5️ Abrir o painel Web
 
 Abra no navegador:
 
@@ -97,8 +97,6 @@ http://localhost:8000/docs
 ```
 Execute o arquivo index.html
 
-```
-ATT: o frontend não é dos melhores😂😂😂
 ```
 ---
 
