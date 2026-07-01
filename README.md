@@ -66,8 +66,8 @@ O sistema permite que o usuário:
 
 ```bash
 python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
+source venv/bin/activate   
+venv\Scripts\activate      
 ```
 
 ### 2️ Instalar dependências
